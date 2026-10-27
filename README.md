@@ -1,149 +1,149 @@
 # php2shell-backport-v7.4
 
-Gói `php7.4` cho **Ubuntu 18.04 (bionic)**, thay thế bản cài từ PPA ondrej (`ppa:ondrej/php`). Gói thêm bản vá PHP2Shell cho **CVE-2026-109618** và **CVE-2026-109619** (cả hai mức Critical, cho phép remote code execution). Code vá lấy từ php-src chính chủ: commit `712e60f9ed` trên branch `PHP-7.4-CVE-2026-109618-109619`.
+`php7.4` packages for **Ubuntu 18.04 (bionic)** that replace the packages installed from the ondrej PPA (`ppa:ondrej/php`). They add the PHP2Shell fix for **CVE-2026-109618** and **CVE-2026-109619** (both Critical, remote code execution). The fix comes from upstream php-src: commit `712e60f9ed` on branch `PHP-7.4-CVE-2026-109618-109619`.
 
-PPA ondrej đã ngừng build cho Ubuntu 18.04 và đã xoá toàn bộ gói bionic. Không còn bản vá chính thức nào cho `php7.4` trên 18.04.
+The ondrej PPA no longer builds for Ubuntu 18.04 and has removed all bionic packages. There is no other official fix for `php7.4` on 18.04.
 
-> Bản build không chính thức, không liên kết với hay được The PHP Group, Zend hoặc Ondřej Surý xác nhận. Xem `NOTICE` và `LICENSE`.
+> Unofficial build. Not affiliated with or endorsed by The PHP Group, Zend or Ondřej Surý. See `NOTICE` and `LICENSE`.
 
-## Phạm vi
+## Scope
 
-Dành cho server Ubuntu 18.04 đang chạy `php7.4` cài từ PPA ondrej (`apache2` mod_php và/hoặc `php7.4-fpm`, CLI, queue worker). Một bộ gói dùng chung cho mọi server. Nên triển khai lần lượt **develop → staging → prod**, chỉ chuyển sang server tiếp theo khi ứng dụng (web, API, cron, queue) ở server trước chạy bình thường.
+For Ubuntu 18.04 servers running `php7.4` from the ondrej PPA (`apache2` mod_php and/or `php7.4-fpm`, CLI, queue workers). One package set works for every server. Roll out **develop → staging → prod**, and move to the next server only after the application (web, API, cron, queue) runs normally on the previous one.
 
-**Tạo AMI hoặc snapshot trước khi cài trên mỗi server.** PPA ondrej đã xoá bản `7.4.27`/`7.4.29`, nên `apt` không thể hạ về bản cũ. `install.sh` có tự sao lưu các gói đang cài (xem phần Rollback), nhưng snapshot vẫn là cách khôi phục chắc chắn nhất.
+**Take an AMI or snapshot before installing on each server.** The ondrej PPA has removed `7.4.27`/`7.4.29`, so `apt` cannot downgrade. `install.sh` backs up the installed packages (see Rollback), but a snapshot is still the most reliable way back.
 
-## Nội dung repo
+## Repository contents
 
 ```text
 php2shell-backport-v7.4/
-├── README.md                              # tài liệu này
-├── LICENSE                                # giấy phép (BSD-3-Clause / PHP License v4), kèm bản gốc 3.01 và Zend 2.00
-├── NOTICE                                 # ghi công, tuyên bố không chính thức
-├── install.sh                             # script cài trên server
-├── build-deb.sh                           # script build (chỉ cần khi build lại)
-├── php-7.4.33-php2shell.patch             # patch dùng khi build (commit php-src, bỏ 4 hunk ondrej có sẵn)
-├── php-7.4.33-php2shell.upstream.patch    # patch gốc của commit 712e60f9ed
-├── strip_hunks.py                         # tạo patch dùng khi build từ patch gốc
-├── source/                                # mã nguồn tương ứng với các gói .deb (tarball php.net + source package ondrej)
+├── README.md                              # this document
+├── LICENSE                                # license (BSD-3-Clause / PHP License v4), plus the original 3.01 and Zend 2.00 texts
+├── NOTICE                                 # attribution, unofficial-build statement
+├── install.sh                             # install script for the server
+├── build-deb.sh                           # build script (only needed to rebuild)
+├── php-7.4.33-php2shell.patch             # patch used for the build (php-src commit minus 4 hunks ondrej already has)
+├── php-7.4.33-php2shell.upstream.patch    # original patch of commit 712e60f9ed
+├── strip_hunks.py                         # derives the build patch from the original patch
+├── source/                                # corresponding source of the .deb packages (php.net tarball + ondrej source package)
 └── out/
-    ├── *_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_*.deb   # 38 gói php7.4 đã vá
-    ├── Packages, Packages.gz              # index apt
-    ├── SHA256SUMS                         # checksum các file .deb
-    └── patches-series.txt                 # danh sách patch đã áp khi build
+    ├── *_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_*.deb   # 38 patched php7.4 packages
+    ├── Packages, Packages.gz              # apt index
+    ├── SHA256SUMS                         # checksums of the .deb files
+    └── patches-series.txt                 # patches applied in the build
 ```
 
-`install.sh` chỉ **nâng các gói `php7.4*` và `libapache2-mod-php7.4` đã cài sẵn** trên server. Script không cài thêm extension, không gỡ gói nào, không đổi module Apache. Các gói sau được giữ nguyên:
+`install.sh` only **upgrades the `php7.4*` and `libapache2-mod-php7.4` packages already installed** on the server. It installs no new extensions, removes no packages and does not change Apache modules. These packages are left untouched:
 
-- `php7.4-imagick`: build riêng, vẫn chạy được vì ABI của PHP 7.4 (`20190902`) không đổi.
-- Các gói `php8.0-*`, `php8.1-*`, `php-common`, `php-gd`, `php-xml`, `php-pear`, `libapache2-mod-php` (meta).
+- `php7.4-imagick`: built separately; still works because the PHP 7.4 ABI (`20190902`) does not change.
+- `php8.0-*`, `php8.1-*`, `php-common`, `php-gd`, `php-xml`, `php-pear`, `libapache2-mod-php` (meta).
 
-## Bước 1. Tải repo (trên máy của bạn)
+## Step 1. Get the repository (on your machine)
 
 ```bash
 git clone https://github.com/relipasoft/php2shell-backport-v7.4.git
 cd php2shell-backport-v7.4
 
-# Kiểm tra toàn vẹn các file .deb, mọi dòng phải là "OK"
+# Check the .deb files; every line must say "OK"
 (cd out && sha256sum -c SHA256SUMS)
 ```
 
-Trên macOS, thay `sha256sum` bằng `shasum -a 256`.
+On macOS, use `shasum -a 256` instead of `sha256sum`.
 
-## Bước 2. Kiểm tra server trước khi cài
+## Step 2. Check the server before installing
 
 ```bash
 ssh -i ~/.ssh/<key>.pem ubuntu@<server-ip>
 ```
 
 ```bash
-lsb_release -ds                    # phải là: Ubuntu 18.04.6 LTS
-dpkg-query -W php7.4-common        # phải là: php7.4-common  7.4.27-1+ubuntu18.04.1+deb.sury.org+1 (hoặc 7.4.29-...)
-df -h /opt                         # cần trống khoảng 200 MB
+lsb_release -ds                    # must be: Ubuntu 18.04.6 LTS
+dpkg-query -W php7.4-common        # must be: php7.4-common  7.4.27-1+ubuntu18.04.1+deb.sury.org+1 (or 7.4.29-...)
+df -h /opt                         # about 200 MB free needed
 ```
 
-Nếu `php7.4-common` không có, hoặc OS không phải 18.04, thì **dừng lại** và gửi output cho người phụ trách.
+If `php7.4-common` is missing or the OS is not 18.04, **stop** and send the output to your administrator.
 
-Lưu lại trạng thái hiện tại để đối chiếu sau khi cài:
+Record the current state to compare after the install:
 
 ```bash
 php7.4 -m > ~/php-modules-before.txt
-sudo supervisorctl status          # ghi lại tên program của queue worker
+sudo supervisorctl status          # note the queue worker program names
 systemctl is-active apache2 php7.4-fpm
 ```
 
-Thoát khỏi server (`exit`).
+Log out of the server (`exit`).
 
-## Bước 3. Copy gói lên server (trên máy của bạn)
+## Step 3. Copy the packages to the server (on your machine)
 
-Chạy trong thư mục `php2shell-backport-v7.4`:
+Run in the `php2shell-backport-v7.4` directory:
 
 ```bash
 ssh -i ~/.ssh/<key>.pem ubuntu@<server-ip> 'mkdir -p /tmp/php2shell'
 scp -i ~/.ssh/<key>.pem -r out/ install.sh ubuntu@<server-ip>:/tmp/php2shell/
 ```
 
-## Bước 4. Cài trên server
+## Step 4. Install on the server
 
 ```bash
 ssh -i ~/.ssh/<key>.pem ubuntu@<server-ip>
 sudo bash /tmp/php2shell/install.sh /tmp/php2shell/out
 ```
 
-Script làm các việc sau:
+The script:
 
-1. In danh sách gói PHP hiện tại.
-2. Chép `.deb` vào `/opt/php2shell-bionic` và kiểm tra `SHA256SUMS`.
-3. Thêm nguồn apt local `/etc/apt/sources.list.d/relipa-php2shell.list`, rồi chạy `apt-get update`.
-4. **Sao lưu** các gói `php7.4*` đang cài bằng `dpkg-repack` vào `/opt/php2shell-bionic-backup/<ngày-giờ>/`.
-5. Nâng các gói `php7.4*` đang cài lên bản vá, giữ nguyên file cấu hình đã sửa (`--force-confold`).
-6. Tự kiểm tra kết quả. Nếu còn gói chưa lên bản vá, script báo lỗi và thoát với mã 1.
+1. Lists the PHP packages currently installed.
+2. Copies the `.deb` files to `/opt/php2shell-bionic` and checks `SHA256SUMS`.
+3. Adds the local apt source `/etc/apt/sources.list.d/relipa-php2shell.list` and runs `apt-get update`.
+4. **Backs up** the installed `php7.4*` packages with `dpkg-repack` to `/opt/php2shell-bionic-backup/<date-time>/`.
+5. Upgrades the installed `php7.4*` packages to the patched build and keeps modified config files (`--force-confold`).
+6. Verifies the result. If any package is not on the patched build, it reports an error and exits with code 1.
 
-Script **không** restart service. File cấu hình (`/etc/php/7.4/apache2/php.ini`, `/etc/php/7.4/cli/php.ini`, `/etc/php/7.4/fpm/...`, `conf.d/`) được giữ nguyên.
+The script does **not** restart services. Config files (`/etc/php/7.4/apache2/php.ini`, `/etc/php/7.4/cli/php.ini`, `/etc/php/7.4/fpm/...`, `conf.d/`) are kept as they are.
 
-`apt` có thể cài thêm vài thư viện chuẩn của Ubuntu 18.04 mà gói mới cần: `libicu60`, `libonig4`, `libargon2-0`. Các thư viện này không xung đột với thư viện của ondrej đang có (`libicu65`, `libargon2-1`...).
+`apt` may install a few standard Ubuntu 18.04 libraries the new packages need: `libicu60`, `libonig4`, `libargon2-0`. They do not conflict with the ondrej libraries already installed (`libicu65`, `libargon2-1`, ...).
 
-## Bước 5. Restart
+## Step 5. Restart
 
 ```bash
-sudo apache2ctl configtest                 # phải ra "Syntax OK"
+sudo apache2ctl configtest                 # must print "Syntax OK"
 sudo systemctl restart apache2
 
-sudo systemctl restart php7.4-fpm          # chỉ trên server có php7.4-fpm đang chạy (prod)
+sudo systemctl restart php7.4-fpm          # only on servers where php7.4-fpm is running
 
-sudo supervisorctl restart all             # queue worker (artisan queue:work)
+sudo supervisorctl restart all             # queue workers (artisan queue:work)
 ```
 
-**Bắt buộc restart queue worker.** Worker là process chạy liên tục, nên vẫn giữ PHP cũ chưa vá trong bộ nhớ cho tới khi restart. Nếu supervisor quản lý nhiều program và không muốn restart tất cả, chỉ restart program chạy `artisan queue:work` (tên lấy từ `supervisorctl status` ở bước 2).
+**Restarting the queue workers is required.** Workers are long-running processes and keep the old, unpatched PHP in memory until restarted. If supervisor manages several programs and you do not want to restart all of them, restart only the programs running `artisan queue:work` (names from `supervisorctl status` in step 2).
 
-Cron (`schedule:run`) không cần làm gì: mỗi lần chạy, cron tự khởi động PHP mới.
+Cron (`schedule:run`) needs nothing: each run starts the new PHP.
 
-## Bước 6. Kiểm tra sau khi cài
+## Step 6. Check after installing
 
 ```bash
 dpkg -l | awk '/^ii/ && /php7.4|libapache2-mod-php7.4/ {print $2, $3}'
 ```
 
-Các gói `php7.4*` (trừ `php7.4-imagick`) và `libapache2-mod-php7.4` phải có version `1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1`.
+All `php7.4*` packages (except `php7.4-imagick`) and `libapache2-mod-php7.4` must show version `1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1`.
 
 ```bash
 php7.4 -v | head -1                                                    # PHP 7.4.33
-grep -c zend_new_array_singleton /usr/bin/php7.4                       # phải ra 1 (hàm chỉ có trong bản vá)
-grep -c zend_new_array_singleton /usr/lib/apache2/modules/libphp7.4.so  # phải ra 1
-php7.4 -m | diff ~/php-modules-before.txt - && echo "extension giống trước"
+grep -c zend_new_array_singleton /usr/bin/php7.4                       # must print 1 (function exists only in the patched build)
+grep -c zend_new_array_singleton /usr/lib/apache2/modules/libphp7.4.so  # must print 1
+php7.4 -m | diff ~/php-modules-before.txt - && echo "same extensions as before"
 sudo apache2ctl -M 2>/dev/null | grep php                              # php7_module (shared)
-sudo supervisorctl status                                              # worker RUNNING, uptime vừa reset
+sudo supervisorctl status                                              # workers RUNNING, uptime just reset
 ```
 
-Sau đó kiểm tra ứng dụng: gọi vài API, mở các trang chính, đẩy thử một job vào queue, xem log Laravel (`storage/logs`) và Apache (`/var/log/apache2/error.log`).
+Then test the application: call a few APIs, open the main pages, push a test job to the queue, and check the Laravel log (`storage/logs`) and the Apache log (`/var/log/apache2/error.log`).
 
-Có thể dọn thư mục tạm: `rm -rf /tmp/php2shell`. **Không** xoá `/opt/php2shell-bionic` và `/opt/php2shell-bionic-backup`.
+You can remove the temporary directory: `rm -rf /tmp/php2shell`. Do **not** remove `/opt/php2shell-bionic` or `/opt/php2shell-bionic-backup`.
 
-### Lưu ý khi test
+### Testing notes
 
-- PHP lên từ `7.4.27`/`7.4.29` tới `7.4.33`. Đây vẫn là các bản sửa lỗi trong cùng nhánh 7.4, thường không ảnh hưởng code.
-- Extension `intl` dùng `libicu60` của Ubuntu thay vì `libicu65` của ondrej. Nếu ứng dụng định dạng ngày, số hoặc tiền tệ bằng `intl` (ví dụ `IntlDateFormatter`, `NumberFormatter`), hãy kiểm tra các màn hình đó trên develop.
+- PHP moves from `7.4.27`/`7.4.29` to `7.4.33`. These are bug-fix releases within the 7.4 branch and normally do not affect application code.
+- The `intl` extension uses Ubuntu's `libicu60` instead of ondrej's `libicu65`. If the application formats dates, numbers or currency with `intl` (for example `IntlDateFormatter`, `NumberFormatter`), check those screens on develop.
 
-## Ghim phiên bản (khuyên dùng trên prod)
+## Pinning the version (recommended on prod)
 
 ```bash
 sudo apt-mark hold $(dpkg-query -W -f='${Package}\n' 'php7.4*' 'libapache2-mod-php7.4' 2>/dev/null)
@@ -151,99 +151,101 @@ sudo apt-mark hold $(dpkg-query -W -f='${Package}\n' 'php7.4*' 'libapache2-mod-p
 
 ## Rollback
 
-**Cách 1: khôi phục AMI/snapshot** đã tạo trước khi cài.
+**Option 1: restore the AMI/snapshot** taken before the install.
 
-**Cách 2: cài lại các gói đã sao lưu** ở bước 4:
+**Option 2: reinstall the packages backed up** in step 4:
 
 ```bash
-sudo apt-mark unhold $(dpkg-query -W -f='${Package}\n' 'php7.4*' 'libapache2-mod-php7.4' 2>/dev/null)   # nếu đã ghim
-ls /opt/php2shell-bionic-backup/                     # chọn thư mục sao lưu
+sudo apt-mark unhold $(dpkg-query -W -f='${Package}\n' 'php7.4*' 'libapache2-mod-php7.4' 2>/dev/null)   # if pinned
+ls /opt/php2shell-bionic-backup/                     # pick a backup directory
 sudo rm -f /etc/apt/sources.list.d/relipa-php2shell.list
-sudo dpkg -i /opt/php2shell-bionic-backup/<ngày-giờ>/*.deb
+sudo dpkg -i /opt/php2shell-bionic-backup/<date-time>/*.deb
 sudo apache2ctl configtest && sudo systemctl restart apache2
-sudo systemctl restart php7.4-fpm                    # nếu có
+sudo systemctl restart php7.4-fpm                    # if present
 sudo supervisorctl restart all
-dpkg-query -W php7.4-common                          # về lại 7.4.27 hoặc 7.4.29
+dpkg-query -W php7.4-common                          # back to 7.4.27 or 7.4.29
 ```
 
-Rollback đưa server về lại bản **chưa vá**. Báo người phụ trách ngay khi phải rollback.
+Rollback returns the server to the **unpatched** version. Tell your administrator right away if you have to roll back.
 
-## Hai thay đổi hành vi (có chủ đích, giống bản vá của PHP)
+## Two behavior changes (intended, same as PHP's fix)
 
-- Khi một request vượt `memory_limit`, hoặc cấp phát bộ nhớ bị tràn kích thước, process **dừng hẳn** thay vì cố phục hồi. Apache tự tạo process mới cho request sau. Code nào bắt lỗi `Allowed memory size exhausted` để xử lý tiếp sẽ thấy khác.
-- Tính năng `session.upload_progress` bị tắt trong code, dù `php -i` vẫn hiện `On`.
+- When a request exceeds `memory_limit`, or a memory allocation size overflows, the process **exits** instead of trying to recover. Apache starts a new process for the next request. Code that catches `Allowed memory size exhausted` and carries on will behave differently.
+- `session.upload_progress` is disabled in code, even though `php -i` still shows `On`.
 
-## Xử lý sự cố
+## Troubleshooting
 
-| Hiện tượng | Nguyên nhân và cách xử lý |
+`install.sh` prints its messages in Vietnamese; the English meaning is in parentheses.
+
+| Message | Cause and action |
 | --- | --- |
-| `Chỉ dành cho Ubuntu 18.04 (bionic).` | Server không phải 18.04. Không cài. |
-| `Máy này chưa cài php7.4-common.` | Server không dùng php7.4. Không cài. |
-| `Không thấy .../Packages.gz` | Sai đường dẫn ở bước 4, hoặc copy thiếu file. Kiểm tra `ls /tmp/php2shell/out`. |
-| `sha256sum` báo `FAILED` | File hỏng khi tải hoặc copy. Clone lại repo. |
-| `Sao lưu thiếu gói, dừng.` | `dpkg-repack` không sao lưu đủ gói. Chưa có gì thay đổi. Gửi output cho người phụ trách. |
-| `apt-get` báo `unmet dependencies` | Server thiếu thư viện và không tải được từ repo Ubuntu. Kiểm tra `sudo apt-get update`. Gửi toàn bộ output, không dùng `--fix-broken` khi chưa hỏi. |
-| `apache2ctl configtest` báo lỗi | Xem `/var/log/apache2/error.log`. Nếu cần, rollback. |
+| `Chỉ dành cho Ubuntu 18.04 (bionic).` (Ubuntu 18.04 only) | The server is not 18.04. Do not install. |
+| `Máy này chưa cài php7.4-common.` (php7.4-common is not installed) | The server does not use php7.4. Do not install. |
+| `Không thấy .../Packages.gz` (Packages.gz not found) | Wrong path in step 4, or files missing from the copy. Check `ls /tmp/php2shell/out`. |
+| `sha256sum` reports `FAILED` | A file was damaged during download or copy. Clone the repository again. |
+| `Sao lưu thiếu gói, dừng.` (backup incomplete, stopping) | `dpkg-repack` did not back up every package. Nothing has changed yet. Send the output to your administrator. |
+| `apt-get` reports `unmet dependencies` | The server is missing libraries and cannot download them from the Ubuntu repositories. Check `sudo apt-get update`. Send the full output; do not run `--fix-broken` without asking. |
+| `apache2ctl configtest` fails | Check `/var/log/apache2/error.log`. Roll back if needed. |
 
-## Thông tin bản vá
+## Patch details
 
 | | |
 | --- | --- |
-| Code vá | Commit [`712e60f9ed`](https://github.com/php/php-src/commit/712e60f9edfd03f0960fc4fc3c2c375f42b90aa2) "Avoid state corruption via bailout" của PHP security team, trên branch [`PHP-7.4-CVE-2026-109618-109619`](https://github.com/php/php-src/tree/PHP-7.4-CVE-2026-109618-109619). 17 file, 78 hunk |
-| Patch dùng khi build | `php-7.4.33-php2shell.patch` = commit trên, bỏ 4 hunk (`main/main.c` hunk 1, `main/rfc1867.c` hunk 5–7) đã có sẵn nguyên văn trong patch ondrej `0062-Introduce-max_multipart_body_parts-INI.patch`. Áp với `--fuzz=0` |
-| Kiểm chứng | Trên cây source cuối cùng, gỡ ngược nguyên bản commit `712e60f9ed` (dry-run, fuzz 0) thành công cả 78/78 hunk, tức là mọi thay đổi của commit đều có mặt |
-| Phần còn lại của branch | Ngoài commit vá, branch chỉ khác tarball 7.4.33 ở commit `004cb82750` "Bumb versions" (sửa `NEWS` và `AC_INIT` trong `configure.ac` thành `7.4.34-dev`). Commit này không phải code nên không đưa vào |
-| Tarball PHP | `php7.4_7.4.33.orig.tar.xz` từ PPA ondrej, sha256 khớp với `php-7.4.33.tar.xz` của php.net |
-| Packaging | `debian/` của source package ondrej `php7.4 1:7.4.33-31+ubuntu22.04.1+deb.sury.org+1`. Chữ ký `.dsc` kiểm bằng key "Ondřej Surý (Automated PPA Upload Key)" `6A1AAD7AE5B401C6E259A7B257067BAA1314C7FC`, key đăng ký trên tài khoản Launchpad `~ondrej` |
-| Patch ondrej giữ lại | `0001`–`0135`: patch packaging Debian và các bản vá bảo mật ondrej backport tới đầu tháng 05/2026. Danh sách đầy đủ trong `out/patches-series.txt` |
-| Patch ondrej bỏ đi | `0136`–`0164` (29 patch). `0136` (GHSA-m8rr-4c36-8gq4) sửa các dòng `isspace()` ngay cạnh chỗ commit vá sửa trong `main/rfc1867.c`, nên từ `0136` trở đi commit chính chủ không áp nguyên văn được. Các patch bị bỏ gồm nhiều bản vá bảo mật ondrej phát hành từ 05/2026 đến 10/2026 (openssl, pgsql, phar, soap, mysqlnd, FastCGI...) và `0164` (bản ondrej tự chuyển thể từ chính commit vá) |
-| Build | Container `ubuntu:18.04`, thư viện build lấy từ repo Ubuntu 18.04 (index bionic của PPA ondrej đã trống) |
-| Version | `1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1`: cao hơn `7.4.27`/`7.4.29` của ondrej, thấp hơn `1:7.4.33-31` đầy đủ của ondrej |
-| Kiến trúc | `amd64` |
-| Chữ ký | Gói không ký. Nguồn apt dùng `[trusted=yes]`, toàn vẹn kiểm bằng `SHA256SUMS` |
+| Fix | Commit [`712e60f9ed`](https://github.com/php/php-src/commit/712e60f9edfd03f0960fc4fc3c2c375f42b90aa2) "Avoid state corruption via bailout" by the PHP security team, on branch [`PHP-7.4-CVE-2026-109618-109619`](https://github.com/php/php-src/tree/PHP-7.4-CVE-2026-109618-109619). 17 files, 78 hunks |
+| Build patch | `php-7.4.33-php2shell.patch` = the commit above without 4 hunks (`main/main.c` hunk 1, `main/rfc1867.c` hunks 5–7) that already exist verbatim in ondrej patch `0062-Introduce-max_multipart_body_parts-INI.patch`. Applied with `--fuzz=0` |
+| Verification | On the final source tree, reverse-applying the original commit `712e60f9ed` (dry run, fuzz 0) succeeds for all 78/78 hunks, so every change of the commit is present |
+| Rest of the branch | Apart from the fix, the branch differs from the 7.4.33 tarball only by commit `004cb82750` "Bumb versions" (`NEWS` and `AC_INIT` in `configure.ac` set to `7.4.34-dev`). It is not code and is not included |
+| PHP tarball | `php7.4_7.4.33.orig.tar.xz` from the ondrej PPA; its sha256 matches `php-7.4.33.tar.xz` from php.net |
+| Packaging | `debian/` from the ondrej source package `php7.4 1:7.4.33-31+ubuntu22.04.1+deb.sury.org+1`. The `.dsc` signature is checked against "Ondřej Surý (Automated PPA Upload Key)" `6A1AAD7AE5B401C6E259A7B257067BAA1314C7FC`, registered on the Launchpad account `~ondrej` |
+| ondrej patches kept | `0001`–`0135`: Debian packaging patches and the security fixes ondrej backported up to early May 2026. Full list in `out/patches-series.txt` |
+| ondrej patches dropped | `0136`–`0164` (29 patches). `0136` (GHSA-m8rr-4c36-8gq4) changes the `isspace()` lines right next to the lines the fix changes in `main/rfc1867.c`, so from `0136` on the upstream commit does not apply verbatim. The dropped patches include many security fixes ondrej released from May to October 2026 (openssl, pgsql, phar, soap, mysqlnd, FastCGI, ...) and `0164` (ondrej's own adaptation of the same fix) |
+| Build | `ubuntu:18.04` container; build dependencies from the Ubuntu 18.04 repositories (the ondrej PPA bionic index is empty) |
+| Version | `1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1`: higher than ondrej's `7.4.27`/`7.4.29`, lower than ondrej's full `1:7.4.33-31` |
+| Architecture | `amd64` |
+| Signing | Packages are not signed. The apt source uses `[trusted=yes]`; integrity is checked with `SHA256SUMS` |
 
-### Kết quả kiểm chứng (22/10/2026, container `ubuntu:18.04`)
+### Test results (2026-10-22, `ubuntu:18.04` container)
 
-PPA ondrej không còn bản `7.4.29`, nên bản giả lập dùng chính các gói đã build, đóng gói lại với version `7.4.29-1+ubuntu18.04.1+deb.sury.org+1`, và `php-common 2:101` của ondrej. Cách này kiểm được đường nâng cấp của `apt` (dependency, conffile, maintainer script, module Apache), không kiểm được khác biệt code giữa 7.4.29 và 7.4.33.
+The ondrej PPA no longer has `7.4.29`, so the test used the built packages repackaged as version `7.4.29-1+ubuntu18.04.1+deb.sury.org+1`, with ondrej's `php-common 2:101`. This tests the `apt` upgrade path (dependencies, conffiles, maintainer scripts, Apache module), not code differences between 7.4.29 and 7.4.33.
 
-| Kiểm tra | Kết quả |
+| Check | Result |
 | --- | --- |
-| `install.sh` trên máy có 17 gói như prod (`apache2` + mod_php, `php7.4-fpm`) | 17 gói lên bản vá, bước tự kiểm tra pass |
-| `php7.4 -m` trước và sau | Giống hệt |
-| `apache2ctl configtest`, `apache2ctl -M` | `Syntax OK`, có `php7_module` |
+| `install.sh` on a host with 17 packages (`apache2` + mod_php, `php7.4-fpm`) | All 17 packages upgraded, self-check passed |
+| `php7.4 -m` before and after | Identical |
+| `apache2ctl configtest`, `apache2ctl -M` | `Syntax OK`, `php7_module` loaded |
 | `php-fpm7.4 -t` | `test is successful` |
-| Code vá có trong binary | `zend_new_array_singleton` có trong `php7.4`, `libphp7.4.so`, `php-fpm7.4` |
-| Conffile | Không có `.dpkg-dist`/`.dpkg-old`, cấu hình giữ nguyên |
-| Thư viện cài thêm | `libargon2-0`, `libicu60`, `libonig4` từ repo Ubuntu |
-| Sao lưu trong `install.sh` | Đủ 17/17 gói vào `/opt/php2shell-bionic-backup/<ngày-giờ>/` |
-| Rollback theo hướng dẫn (cách 2) | `dpkg -i` đưa cả 17 gói về `7.4.29-1+ubuntu18.04.1+deb.sury.org+1`, `apache2ctl configtest` pass |
+| Fix present in binaries | `zend_new_array_singleton` found in `php7.4`, `libphp7.4.so`, `php-fpm7.4` |
+| Conffiles | No `.dpkg-dist`/`.dpkg-old`, configuration unchanged |
+| Extra libraries installed | `libargon2-0`, `libicu60`, `libonig4` from the Ubuntu repositories |
+| Backup in `install.sh` | 17/17 packages saved to `/opt/php2shell-bionic-backup/<date-time>/` |
+| Rollback as documented (option 2) | `dpkg -i` returned all 17 packages to `7.4.29-1+ubuntu18.04.1+deb.sury.org+1`, `apache2ctl configtest` passed |
 
-## Build lại (cho người bảo trì)
+## Rebuilding (for maintainers)
 
 ```bash
 mkdir -p out
 docker run --rm -e BUILDID=+relipa.php2shell.1 -v "$PWD":/kit:ro -v "$PWD/out":/out ubuntu:18.04 bash /kit/build-deb.sh
 ```
 
-Mất khoảng 20–25 phút. Khi phát hành bản mới, tăng `BUILDID` (ví dụ `+relipa.php2shell.2`) để `apt` nhận.
+Takes about 20–25 minutes. For a new release, bump `BUILDID` (for example `+relipa.php2shell.2`) so `apt` picks it up.
 
-## Lưu ý
+## Notes
 
-- Patch là "minimal mitigation" theo lời PHP. Gói này **không** có các bản vá bảo mật ondrej phát hành từ patch `0136` trở đi.
-- Ubuntu 18.04 đã hết hỗ trợ tiêu chuẩn, PHP 7.4 đã hết hỗ trợ từ 11/2022. Về lâu dài nên chuyển sang bản OS và PHP còn được hỗ trợ.
+- PHP describes this patch as a "minimal mitigation". These packages do **not** include the ondrej security fixes from patch `0136` onward.
+- Ubuntu 18.04 is out of standard support and PHP 7.4 has been end-of-life since November 2022. In the long term, move to a supported OS and PHP version.
 
-## Giấy phép và ghi công
+## License and attribution
 
 This product includes PHP software, freely available from <http://www.php.net/software/>.
 This product includes the Zend Engine, freely available at http://www.zend.com
 
-- Script và tài liệu của repo (`build-deb.sh`, `install.sh`, `strip_hunks.py`, README, NOTICE): BSD-3-Clause, © 2026 Relipa.
-- Mã PHP (2 file patch, `out/*.deb`, `source/`): PHP 7.4.33 phát hành theo PHP License 3.01 và Zend Engine License 2.00. Repo dùng mã này theo PHP License v4 và Zend Engine License v3.0 (tương đương BSD-3-Clause), theo điều 5 của PHP License 3.01 và điều 4 của Zend Engine License 2.00. Xem [php.net/license](https://www.php.net/license/).
-- Các thành phần khác trong `.deb` (thư viện đi kèm, có phần LGPL; packaging Debian của Ondřej Surý) giữ giấy phép riêng, liệt kê trong `/usr/share/doc/php7.4-common/copyright` của gói. Không xoá file này khi phát hành lại.
-- Mã nguồn tương ứng với các gói `.deb` nằm trong `source/` (checksum trong `source/SHA256SUMS`), dựng lại được bằng `build-deb.sh`.
-- Bản build không chính thức, không liên kết với hay được The PHP Group, Zend, Perforce hoặc Ondřej Surý xác nhận.
+- Repository scripts and documentation (`build-deb.sh`, `install.sh`, `strip_hunks.py`, README, NOTICE): BSD-3-Clause, © 2026 Relipa.
+- PHP code (the two patch files, `out/*.deb`, `source/`): PHP 7.4.33 was released under the PHP License 3.01 and the Zend Engine License 2.00. This repository uses that code under the PHP License v4 and the Zend Engine License v3.0 (equivalent to BSD-3-Clause), as allowed by clause 5 of the PHP License 3.01 and clause 4 of the Zend Engine License 2.00. See [php.net/license](https://www.php.net/license/).
+- Other components in the `.deb` packages (bundled libraries, some under LGPL; Debian packaging by Ondřej Surý) keep their own licenses, listed in `/usr/share/doc/php7.4-common/copyright` inside the packages. Do not remove this file when redistributing.
+- The corresponding source of the `.deb` packages is in `source/` (checksums in `source/SHA256SUMS`) and can be rebuilt with `build-deb.sh`.
+- Unofficial build. Not affiliated with or endorsed by The PHP Group, Zend, Perforce or Ondřej Surý.
 
-## Tài liệu
+## References
 
 - [Ubuntu – CVE-2026-109618](https://ubuntu.com/security/CVE-2026-109618)
 - [Ubuntu – CVE-2026-109619](https://ubuntu.com/security/CVE-2026-109619)
