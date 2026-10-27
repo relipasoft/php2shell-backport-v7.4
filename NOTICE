@@ -1,0 +1,19 @@
+This product includes PHP software, freely available from <http://www.php.net/software/>.
+This product includes the Zend Engine, freely available at http://www.zend.com
+
+This is an unofficial rebuild. It is not affiliated with, endorsed by, or
+supported by The PHP Group, Zend Technologies Ltd., Perforce Software, Inc.,
+or Ondřej Surý (deb.sury.org). "PHP" is used only to describe the software
+these packages contain.
+
+Contents:
+- php-7.4.33-php2shell.upstream.patch: php-src commit 712e60f9ed (branch
+  PHP-7.4-CVE-2026-109618-109619), published by the PHP security team.
+- php-7.4.33-php2shell.patch: the same commit without 4 hunks already present
+  in ondrej patch 0062-Introduce-max_multipart_body_parts-INI.patch.
+- out/*.deb: built from the source package in source/ with build-deb.sh.
+- source/: corresponding source of out/*.deb (php.net tarball 7.4.33 and the
+  ondrej/php source package 1:7.4.33-31+ubuntu22.04.1+deb.sury.org+1),
+  checksums in source/SHA256SUMS.
+
+See LICENSE for license terms.

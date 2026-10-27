@@ -1,0 +1,923 @@
+Package: libapache2-mod-php7.4
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4451
+Depends: media-types | mime-support, php7.4-cli, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-json, php7.4-opcache, tzdata, ucf, apache2-api-20120211, apache2-bin (>= 2.4.16), libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Recommends: apache2
+Suggests: php-pear
+Provides: libapache2-mod-php, phpapi-20190902
+Filename: ./libapache2-mod-php7.4_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1346236
+MD5sum: 29f13355e69837fdb7fab656474b3a47
+SHA1: 58ae5b83f33d48c5a8d4da1a27f9ba2baec40014
+SHA256: 1b638494691c8de3d8e0d80eaaa2c3a3ede299e2971ad25eb46c511a3f7437cb
+Section: httpd
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (Apache 2 module)
+ This package provides the PHP module for the Apache 2 webserver (as
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: libphp7.4-embed
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4444
+Depends: media-types | mime-support, php7.4-cli, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-json, php7.4-opcache, tzdata, ucf, libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Suggests: php-pear
+Provides: libphp-embed, phpapi-20190902
+Filename: ./libphp7.4-embed_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1343068
+MD5sum: 9eec64f9d19f2147def2a38e13dbe909
+SHA1: 4ea6eb289a67168dd5268b10880134d313c481e8
+SHA256: d9aeb6f5c4e4e78120e962fb7c01133e3440f91e8bba1776102e6f1b8a477958
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: HTML-embedded scripting language (Embedded SAPI library)
+ This package provides the library /usr/lib/libphp7.4.so which can
+ be used by application developers to embed PHP scripting functionality.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcntl pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+ .
+ WARNING: The embed SAPI is experimental and there's no guarantee that
+ the API/ABI will be kept compatible even between minor releases.  You
+ have been warned.
+
+Package: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: all
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 90
+Depends: libapache2-mod-php7.4 | php7.4-fpm | php7.4-cgi, php7.4-common
+Provides: php
+Filename: ./php7.4_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_all.deb
+Size: 56724
+MD5sum: 2f57dce56712f374f1a331606578d947
+SHA1: 7d16fb08bda8019ee0c8e7ad0c329c65c080fa00
+SHA256: e86f5d904f72b8694698060b48dac6f8731004dfd986aa618a9889020650ccec
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP interpreter
+ installed. Removing this package won't remove PHP from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-bcmath
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 64
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14)
+Provides: php-bcmath
+Filename: ./php7.4-bcmath_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 15080
+MD5sum: 689598adefa9ff681561d41dfba19861
+SHA1: e3049aad29408d859e78775a3dadd03116737959
+SHA256: 988d099721b6051a8e91268f28e64a0c4b2df339636a89d1ffa67873a7199c8f
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Bcmath module for PHP
+ This package provides the Bcmath module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-bz2
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 52
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libbz2-1.0, libc6 (>= 2.14)
+Provides: php-bz2
+Filename: ./php7.4-bz2_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 10288
+MD5sum: 0dfa322be03ee17e95a0725806edc2fe
+SHA1: c18a5a6faa777de6b5ae1f8a530b7661f01fd83c
+SHA256: 2efcdbf9609ba3fcec9c7e9adb0e7caeb3a4345e7a43ebc16e90cd9147554c46
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: bzip2 module for PHP
+ This package provides the bzip2 module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-cgi
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 8939
+Depends: media-types | mime-support, php7.4-cli, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-json, php7.4-opcache, tzdata, ucf, libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Suggests: php-pear
+Provides: php-cgi, phpapi-20190902
+Filename: ./php7.4-cgi_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1362864
+MD5sum: 6620f65214a71ab21cc04f6d8ce462fa
+SHA1: acfc9cb49cd17339d1670e87fb76b6cbeedc4eb6
+SHA256: 7a3f212a3b829f9d4b72a18b3b009e184bfa47913df4d95b54e40e9761bb90ed
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (CGI binary)
+ This package provides the /usr/lib/cgi-bin/php CGI interpreter built
+ for use in Apache 2 with mod_actions, or any other CGI httpd that
+ supports a similar mechanism.  Note that MOST users probably
+ want the php7.4-fpm package.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcntl pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-cli
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4613
+Depends: libedit2 (>= 2.11-20080614-4), media-types | mime-support, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-json, php7.4-opcache, php7.4-readline, tzdata, ucf, libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Suggests: php-pear
+Provides: php-cli, phpapi-20190902
+Filename: ./php7.4-cli_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1401744
+MD5sum: 73e31c6f3264bdda242c483488156a91
+SHA1: e6605bbb4ed9a715294a2abb7f9a60b70bdd59f4
+SHA256: 55eb277927b82b61a4e89d76187c6b98fae9cebb514a2e1cc59717e256539dcd
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: command-line interpreter for the PHP scripting language
+ This package provides the /usr/bin/php7.4 command interpreter, useful for
+ testing PHP scripts from a shell or performing general shell scripting tasks.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcntl pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-common
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 6954
+Depends: php-common (>= 1:81~), ucf, libc6 (>= 2.27), libffi6 (>= 3.0.10~rc8), libssl1.1 (>= 1.1.0)
+Breaks: gforge-common (<< 6), php7.0-curl (<< 7.0.33-1~), php7.2-sodium (<< 7.2.12~)
+Provides: php-calendar, php-ctype, php-exif, php-ffi, php-fileinfo, php-ftp, php-iconv, php-pdo, php-phar, php-posix, php-shmop, php-sockets, php-sysvmsg, php-sysvsem, php-sysvshm, php-tokenizer, php7.4-calendar, php7.4-ctype, php7.4-exif, php7.4-ffi, php7.4-fileinfo, php7.4-ftp, php7.4-gettext, php7.4-iconv, php7.4-pdo, php7.4-phar, php7.4-posix, php7.4-shmop, php7.4-sockets, php7.4-sysvmsg, php7.4-sysvsem, php7.4-sysvshm, php7.4-tokenizer
+Filename: ./php7.4-common_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 646212
+MD5sum: 20890700c1803468cdd3f5341459ee51
+SHA1: 9ec248713f51e14b5d1b841b1a51d1bb2db7039f
+SHA256: a728702515014126e1beb28bf7128ae6ea6926dc975cfde60bc64d7845566cce
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: documentation, examples and common module for PHP
+ This package provides the documentation, examples and common module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-curl
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 124
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libcurl4 (>= 7.56.1)
+Breaks: php7.0-curl (<< 7.0.33-1~)
+Provides: php-curl
+Filename: ./php7.4-curl_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 31064
+MD5sum: 2601f6636b43b1866d6595ee04745dbf
+SHA1: df4bf561d7f9cad556dc393b875ead102530a999
+SHA256: be60aac69b70c0bb05a56d6b6e99f7d1a13132ba410af7fbd991f35041865299
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: CURL module for PHP
+ This package provides the CURL module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-dba
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 88
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libdb5.3, liblmdb0 (>= 0.9.7), libqdbm14 (>= 1.8.74)
+Provides: php-dba
+Filename: ./php7.4-dba_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 23304
+MD5sum: 5c318f5f17a26990971086ad5d0d8708
+SHA1: 664bd270d00a4f47f70ac6f75d2d4d5806f4f40f
+SHA256: 86114513f3b4f2e4cc6141263c5dc6fb0714bbacf8f8870b875df335f9bc64df
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: DBA module for PHP
+ This package provides the DBA module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-dev
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4734
+Depends: autoconf (>= 2.63), automake (>= 1.11), libpcre2-dev (>= 10.30), libssl-dev, php7.4-cli (>= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), pkg-config, shtool, libtool (>= 2.4.6-0.1~)
+Recommends: pkg-php-tools
+Suggests: dh-php
+Filename: ./php7.4-dev_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 431352
+MD5sum: c4db687e33cf2a6984056b95cff875c6
+SHA1: 33aace3fbd685f6bf0db4bb6e72e7442e0a5c803
+SHA256: 9c82f18cf8e215067e797ed2fb3a8f53a53e06191ed56b8f4e7438f2154ab909
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Files for PHP7.4 module development
+ This package provides the files from the PHP7.4 source needed for compiling
+ additional modules.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-enchant
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 52
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libenchant1c2a (>= 1.6.0)
+Provides: php-enchant
+Filename: ./php7.4-enchant_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 9136
+MD5sum: 47b2c255c3e1ae5088f5815e8200ac02
+SHA1: 04a85cb25cfbcaf39d2889575c5d9971340706a6
+SHA256: 5873fc8244c9d77556988c65e6aa37dcc74d85693f19f3b22394d711065457e5
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Enchant module for PHP
+ This package provides the Enchant module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-fpm
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4651
+Depends: media-types | mime-support, php7.4-cli, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-json, php7.4-opcache, procps, systemd | systemd-tmpfiles, tzdata, ucf, libacl1 (>= 2.2.51-8), libapparmor1 (>= 2.7.0~beta1+bzr1772), libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libsystemd0, libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Suggests: php-pear
+Provides: php-fpm, phpapi-20190902
+Filename: ./php7.4-fpm_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1414016
+MD5sum: ec5449edf3c4621ea82eca581f147dee
+SHA1: 1173a7fa4decd8ea294459292c3694e88841ca61
+SHA256: 9c15ba3d4e46410e1dd787844f626cbd2d1cb02e404285c1538280962aee44aa
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (FPM-CGI binary)
+ This package provides the Fast Process Manager interpreter that runs
+ as a daemon and receives Fast/CGI requests.  Note that MOST Apache users
+ probably want the libapache2-mod-php7.4 package.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-gd
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 132
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.4), libgd3 (>= 2.1.1)
+Provides: php-gd
+Filename: ./php7.4-gd_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 27372
+MD5sum: 1bdb3380798ab67ac794e9f421596e7e
+SHA1: e0f54580385f0b5931ced67ee3c0befc2b3b8934
+SHA256: 88d5502783e765bc228d794bbce1646addd5dae4cba182b4e9fc7acc0060f01c
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: GD module for PHP
+ This package provides the GD module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-gmp
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 96
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.4), libgmp10
+Provides: php-gmp
+Filename: ./php7.4-gmp_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 20532
+MD5sum: 2722e251ffa4f6dc586bfd4a2cbdea7c
+SHA1: 74a64a996e161be1db2ad9cfa7682bcc5ea027f5
+SHA256: d46b4ccc7b310c00032433ad7d621560432a69b342f790276f9361b4c8b5167b
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: GMP module for PHP
+ This package provides the GMP module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-imap
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 124
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc-client2007e, libc6 (>= 2.14)
+Provides: php-imap
+Filename: ./php7.4-imap_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 30476
+MD5sum: c43c68781e1f679924d54f0185b5b3be
+SHA1: c340b88e18528d2ba24083cf8cd01371112fef04
+SHA256: a68ef77bd554544fa81d5716516c0cbe53ae34d7223c6c5872e25f350ca76eef
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: IMAP module for PHP
+ This package provides the IMAP module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-interbase
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 60
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libfbclient2 (>= 2.5.0.25784~ReleaseCandidate1.ds2)
+Provides: php-pdo-firebird, php7.4-pdo-firebird
+Filename: ./php7.4-interbase_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 14360
+MD5sum: aa03629390318dd7c760166ee548e3a1
+SHA1: 0aa322609a61ea71f4ee3031abcf8b1aed0c1f43
+SHA256: e2ecbfe2b4e869389e64d19853a3aca8490b6b8af89578f67ece6c7794707d7f
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Interbase module for PHP
+ This package provides the Interbase module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-intl
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 496
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libgcc1 (>= 1:3.0), libicu60 (>= 60.1-1~), libstdc++6 (>= 4.9)
+Provides: php-intl
+Filename: ./php7.4-intl_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 123832
+MD5sum: e2d9418ba3f6304dfc96caf21b0ccadf
+SHA1: 550037b7d00f3a5cef604196c614172fc8bc0e2c
+SHA256: 779c069b8638e6f23efe0f39659ee40ca954261cd0d5679fa15e24db06790486
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Internationalisation module for PHP
+ This package provides the Internationalisation module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-json
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 72
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14)
+Provides: php-json
+Filename: ./php7.4-json_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 18668
+MD5sum: 5263e63ee9f0a1e6c269a034b6d5158b
+SHA1: 56f8a1618cf051004eb87d786e61d9b5d36bc6f2
+SHA256: 6d71667ff94cedf302488866bdf20e0dfb4bb3cefc2196c6e5c24b3db6be3ece
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: JSON module for PHP
+ This package provides the JSON module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-ldap
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 120
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libldap-2.4-2 (>= 2.4.25)
+Provides: php-ldap
+Filename: ./php7.4-ldap_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 29264
+MD5sum: 74bb17cc22061bbc7f2f58ce00bfb2e5
+SHA1: 373c790911b2e61ff68afe98c16005614bad38e5
+SHA256: aaed10fc6cef225a74ebfab46fa29ab592aa6d343171fe45fbf02f3476c7909e
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: LDAP module for PHP
+ This package provides the LDAP module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-litespeed
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4491
+Depends: media-types | mime-support, php7.4-cli, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), procps, systemd | systemd-tmpfiles, tzdata, ucf, libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Suggests: php-pear
+Provides: php-json, php-litespeed, php7.4-json, phpapi-20190902
+Filename: ./php7.4-litespeed_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1365932
+MD5sum: 919c3e193b30277748e53b0555363334
+SHA1: ed3da45ef570be2047a8d6e9fc98ff9acf510606
+SHA256: 01a3c1699807ba8a0db7edfd505def9e2964b711cf3b207fe7c5227882373cb2
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (LiteSpeed binary)
+ This package provides the LiteSpeed SAPI module that provides a dedicated
+ interface for PHP integration with OpenLiteSpeed or LiteSpeed Web Server.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-mbstring
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 1054
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libonig4 (>= 5.9.5)
+Provides: php-mbstring
+Filename: ./php7.4-mbstring_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 396948
+MD5sum: eb16c6bdb3d1a9a9c34c74f52b1e80de
+SHA1: b2331beda29c409e2af3994e2e1761726f8d8827
+SHA256: 2f321045d302d118ce47b436a579cc34a8117e138997a93b4f2951048585c956
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: MBSTRING module for PHP
+ This package provides the MBSTRING module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-mysql
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 443
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.15)
+Provides: php-mysqli, php-mysqlnd, php-pdo-mysql, php7.4-mysqli, php7.4-mysqlnd, php7.4-pdo-mysql
+Filename: ./php7.4-mysql_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 119388
+MD5sum: 99e810c471dcc109b83222089207c588
+SHA1: 407ad42aeccf73add0056fd177a84149ea47de5b
+SHA256: 8cf2e7d6a331ca212bce8ea00f5b3b3a8d474a58c9c8279f0db7d5a05a014517
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: MySQL module for PHP
+ This package provides the MySQL module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-odbc
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 124
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libodbc1 (>= 2.3.1)
+Provides: php-odbc, php-pdo-odbc, php7.4-pdo-odbc
+Filename: ./php7.4-odbc_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 31000
+MD5sum: 0823a04c7256a22f953d5ae8c74c9039
+SHA1: 6574d3690bc45b7c464c9f7cc5d5f52806dc8996
+SHA256: 4828a8bbb4e3e05bb6833879875f4e4ee8219d0d6825225024509e9e9140a3a9
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: ODBC module for PHP
+ This package provides the ODBC module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-opcache
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 560
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.27)
+Provides: php-opcache
+Filename: ./php7.4-opcache_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 195652
+MD5sum: 632c531977500cc067c4bac374e0136c
+SHA1: 4acb2ccb6e344e700b1d5fa9e50733efd0f8ad91
+SHA256: e15cce08a9e7f5cde8cda049fbb5bac428adb38a19933c2ec17210cc503b7491
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Zend OpCache module for PHP
+ This package provides the Zend OpCache module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-pgsql
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 208
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libpq5 (>= 9.3~)
+Provides: php-pdo-pgsql, php-pgsql, php7.4-pdo-pgsql
+Filename: ./php7.4-pgsql_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 56544
+MD5sum: 64d2f306cecaf6f206c4d525dd695b21
+SHA1: e9bf9040f58c7f6f370c875bdf47b4874d8386fd
+SHA256: cedfef5b3f5f27a8577e9287a0ea18fac8f4557eb0a3899bbfdd8784c00d6a5b
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: PostgreSQL module for PHP
+ This package provides the PostgreSQL module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-phpdbg
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 4710
+Depends: media-types | mime-support, php7.4-cli, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), php7.4-json, php7.4-opcache, tzdata, ucf, libargon2-0 (>= 0~20160406~), libc6 (>= 2.27), libpcre2-8-0 (>= 10.31), libsodium23 (>= 1.0.14), libssl1.1 (>= 1.1.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4)
+Recommends: php-readline
+Provides: php-phpdbg, phpapi-20190902
+Filename: ./php7.4-phpdbg_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 1442692
+MD5sum: bd9f269f9942cb338e9b6558ea271528
+SHA1: fb95e6fba745b132b491f39bed61fdf4aa2e62df
+SHA256: 1b93470ea0759b0d849161d84722ded6abecb4f5095775f524a84a8d974b9800
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (PHPDBG binary)
+ This package provides the /usr/bin/phpdbg command interpreter, useful for
+ stepthrough debugging of PHP code.
+ .
+ The following extensions are built in: Core date filter hash libxml openssl
+ pcntl pcre Reflection session sodium SPL standard zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-pspell
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 52
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libaspell15 (>= 0.60.7~20110707), libc6 (>= 2.4)
+Provides: php-pspell
+Filename: ./php7.4-pspell_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 8492
+MD5sum: b4853b54de1096d692d5511d9f33c0c2
+SHA1: 63efca236fa493bd2f3de4b39e75ca13fd342c3e
+SHA256: 4ea27ba38f9b34d9eeabc93fb691ef496506f7e2951793addef4effec203cb69
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: pspell module for PHP
+ This package provides the pspell module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-readline
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 60
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libedit2 (>= 3.1-20160903)
+Provides: php-readline
+Filename: ./php7.4-readline_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 12296
+MD5sum: 4604457ea6522b439850f6cbf01df620
+SHA1: 70ec3af9b61e4a795df3eeb99bf72d45f9d4b056
+SHA256: fe2bb3a3ceac5ac43d06fc95243f779e31bfc743f08fca99b5717127ccda398e
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: readline module for PHP
+ This package provides the readline module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-snmp
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 80
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libsnmp30 (>= 5.7.3+dfsg-1.8ubuntu3.8~dfsg)
+Recommends: snmp
+Provides: php-snmp
+Filename: ./php7.4-snmp_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 18128
+MD5sum: 68af434e744cecf4f76e6cb9f9ce9498
+SHA1: ae888fa12b6b6575982b74b5910e7143dcf5ec89
+SHA256: 699c67bae96f3472c4540138fc8fdcc5e1ef7016ce9fa9968fb9ac073f64f9af
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: SNMP module for PHP
+ This package provides the SNMP module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-soap
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 324
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libxml2 (>= 2.7.4)
+Provides: php-soap
+Filename: ./php7.4-soap_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 112484
+MD5sum: 770d0e11223cfc4d62251b35e0305a4d
+SHA1: 27938482f7d4274061b687ee2a3647aaa2edce2c
+SHA256: 74c8797b53f45c9ae72ebbf07a16662aff04008fdf8634e241f4da3016aefddc
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: SOAP module for PHP
+ This package provides the SOAP module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-sqlite3
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 112
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libsqlite3-0 (>= 3.14.0)
+Provides: php-pdo-sqlite, php-sqlite3, php7.4-pdo-sqlite
+Filename: ./php7.4-sqlite3_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 26392
+MD5sum: fac056c1265255fc84904a605d9d2a6d
+SHA1: 0c824e0fd809b58cdaf418920aaf47bade461a5b
+SHA256: 98c3e40eedd74358f4c06a3d6ca51786fd51e2ec28b7f1ed5767768041857aca
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: SQLite3 module for PHP
+ This package provides the SQLite3 module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-sybase
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 60
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libsybdb5 (>= 0.63)
+Provides: php-pdo-dblib, php7.4-pdo-dblib
+Filename: ./php7.4-sybase_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 12320
+MD5sum: eee3087f2093c9669906b0ae0484cf6c
+SHA1: bd74ca4594e53bd23d51b5a64c215071601a85b7
+SHA256: d139f38468d797b41d980fb98894ec83691ab045618f4404bc6300126c8367b8
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Sybase module for PHP
+ This package provides the Sybase module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-tidy
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 84
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libtidy5 (>= 5.2.0)
+Provides: php-tidy
+Filename: ./php7.4-tidy_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 17188
+MD5sum: a4a09d9f7711217ad9978816836b132c
+SHA1: 278a7b7c500e23d0eae739fab42e1e48f708d94f
+SHA256: c518b3fd71d4cb69639e03d1da10aa9c39b264a0380630ce4d313d6ac8a4d9a7
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: tidy module for PHP
+ This package provides the tidy module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-xml
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 401
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libxml2 (>= 2.9.0), libxslt1.1 (>= 1.1.25)
+Breaks: php7.4-xsl (<< 7.0.3-6~)
+Replaces: php7.4-xsl (<< 7.0.3-6~)
+Provides: php-dom, php-simplexml, php-xml, php-xmlreader, php-xmlwriter, php-xsl, php7.4-dom, php7.4-simplexml, php7.4-xmlreader, php7.4-xmlwriter, php7.4-xsl
+Filename: ./php7.4-xml_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 97192
+MD5sum: a860564c79f4e8a0528dd160823e1885
+SHA1: b71c5bf2188a20d4df83ebc785e818eb4add930d
+SHA256: 78d2d865a49829028dc90ad66c0b2d13003f4cbd1a21fe1acd4ec62a96ea723f
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: DOM, SimpleXML, XML, and XSL module for PHP
+ This package provides the DOM, SimpleXML, XML, and XSL module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-xmlrpc
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 60
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.14), libxmlrpc-epi0
+Provides: php-xmlrpc
+Filename: ./php7.4-xmlrpc_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 12800
+MD5sum: 0fb568d3b88785d2249010f9e39061bf
+SHA1: 0bf92e35354cd8533c7603c9747f111176ce2c7e
+SHA256: 90c304921deb67c2cc90a5e88a48463ce37ef22d13e9b02abad02cc0af9f067e
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: XMLRPC-EPI module for PHP
+ This package provides the XMLRPC-EPI module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: php7.4-xsl
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: all
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 87
+Depends: php7.4-common, php7.4-xml
+Filename: ./php7.4-xsl_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_all.deb
+Size: 56380
+MD5sum: d113c4660832b2e35c122c6f60373f1b
+SHA1: 8b2d255cc38da6fa1266a17365639125efd3bc43
+SHA256: fce3ec1b2a59e640248abb370caa29920b960059e1f3af9e27aa47d5d78022bc
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: XSL module for PHP (dummy)
+ This package is a transitional dummy package and can be safely
+ removed.
+
+Package: php7.4-zip
+Source: php7.4
+Version: 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1
+Architecture: amd64
+Maintainer: Debian PHP Maintainers <team+pkg-php@tracker.debian.org>
+Installed-Size: 88
+Depends: php-common (>= 1:81~), ucf, php7.4-common (= 1:7.4.33-31~ubuntu18.04.1+relipa.php2shell.1), libc6 (>= 2.27), libzip4 (>= 1.0)
+Provides: php-zip
+Filename: ./php7.4-zip_7.4.33-31~ubuntu18.04.1+relipa.php2shell.1_amd64.deb
+Size: 20724
+MD5sum: 58b5a6c903a3bd3e024b5c838ca56ba3
+SHA1: 094df99f48994a2b036dbd42413efee82941996c
+SHA256: 052f9fd1f275a2252f63d78452691b5692ca6d978754919cbaaef35f4a5d2f40
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Zip module for PHP
+ This package provides the Zip module(s) for PHP.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
