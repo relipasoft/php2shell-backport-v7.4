@@ -175,15 +175,13 @@ Rollback returns the server to the **unpatched** version. Tell your administrato
 
 ## Troubleshooting
 
-`install.sh` prints its messages in Vietnamese; the English meaning is in parentheses.
-
 | Message | Cause and action |
 | --- | --- |
-| `Chỉ dành cho Ubuntu 18.04 (bionic).` (Ubuntu 18.04 only) | The server is not 18.04. Do not install. |
-| `Máy này chưa cài php7.4-common.` (php7.4-common is not installed) | The server does not use php7.4. Do not install. |
-| `Không thấy .../Packages.gz` (Packages.gz not found) | Wrong path in step 4, or files missing from the copy. Check `ls /tmp/php2shell/out`. |
+| `For Ubuntu 18.04 (bionic) only.` | The server is not 18.04. Do not install. |
+| `php7.4-common is not installed on this host.` | The server does not use php7.4. Do not install. |
+| `.../Packages.gz not found.` | Wrong path in step 4, or files missing from the copy. Check `ls /tmp/php2shell/out`. |
 | `sha256sum` reports `FAILED` | A file was damaged during download or copy. Clone the repository again. |
-| `Sao lưu thiếu gói, dừng.` (backup incomplete, stopping) | `dpkg-repack` did not back up every package. Nothing has changed yet. Send the output to your administrator. |
+| `Backup is missing packages, stopping.` | `dpkg-repack` did not back up every package. Nothing has changed yet. Send the output to your administrator. |
 | `apt-get` reports `unmet dependencies` | The server is missing libraries and cannot download them from the Ubuntu repositories. Check `sudo apt-get update`. Send the full output; do not run `--fix-broken` without asking. |
 | `apache2ctl configtest` fails | Check `/var/log/apache2/error.log`. Roll back if needed. |
 
