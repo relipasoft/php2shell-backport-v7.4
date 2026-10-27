@@ -6,6 +6,16 @@ The ondrej PPA no longer builds for Ubuntu 18.04 and has removed all bionic pack
 
 > Unofficial build. Not affiliated with or endorsed by The PHP Group, Zend or Ondřej Surý. See `NOTICE` and `LICENSE`.
 
+## Branches
+
+This repository keeps one branch per target, named `<os>-<os version>-<packaging>`. Each target applies the same PHP fix but is built and tested on its own OS with the packaging of the PHP it replaces.
+
+| Branch | OS | Replaces PHP installed from |
+| --- | --- | --- |
+| `ubuntu-18.04-ondrej` (this branch) | Ubuntu 18.04 (bionic), amd64 | ondrej PPA (`ppa:ondrej/php`) |
+
+Use the branch that matches both the server's OS version and the source its `php7.4` packages came from (`apt-cache policy php7.4-common`).
+
 ## Scope
 
 For Ubuntu 18.04 servers running `php7.4` from the ondrej PPA (`apache2` mod_php and/or `php7.4-fpm`, CLI, queue workers). One package set works for every server. Roll out **develop → staging → prod**, and move to the next server only after the application (web, API, cron, queue) runs normally on the previous one.
@@ -40,7 +50,7 @@ php2shell-backport-v7.4/
 ## Step 1. Get the repository (on your machine)
 
 ```bash
-git clone https://github.com/relipasoft/php2shell-backport-v7.4.git
+git clone -b ubuntu-18.04-ondrej https://github.com/relipasoft/php2shell-backport-v7.4.git
 cd php2shell-backport-v7.4
 
 # Check the .deb files; every line must say "OK"
